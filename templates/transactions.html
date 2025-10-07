@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Transactions{% endblock %}
+{% block content %}
+  <h2>Transaction History</h2>
+  <table class='tx'>
+    <thead><tr><th>Type</th><th>Amount</th><th>Counterparty</th><th>Timestamp</th></tr></thead>
+    <tbody>
+    {% for t in transactions %}
+      <tr>
+        <td>{{ t['type'] }}</td>
+        <td>{{ '%.2f'|format(t['amount']) }}</td>
+        <td>{{ t['counterparty'] or '-' }}</td>
+        <td>{{ t['timestamp'] }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

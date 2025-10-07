@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <title>{% block title %}Banking App{% endblock %}</title>
+  <link rel='stylesheet' href='/static/style.css'>
+</head>
+<body>
+  <nav class='nav'>
+    <a href='/'>Home</a>
+    {% if session.username %}
+      <a href='/dashboard'>Dashboard</a>
+      <a href='/transactions'>Transactions</a>
+      <a href='/logout'>Logout ({{ session.username }})</a>
+    {% else %}
+      <a href='/login'>Login</a>
+      <a href='/register'>Register</a>
+    {% endif %}
+  </nav>
+  <main class='container'>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class='messages'>
+        {% for cat, msg in messages %}
+          <div class='msg {{ cat }}'>{{ msg }}</div>
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <script src='/static/script.js'></script>
+</body>
+</html>
